@@ -14,11 +14,21 @@ echo "	>> Cleaning up $OUTPUT."
 [ -e $OUTPUT ] && rm $OUTPUT
 
 echo "	>> generating $TMPFILE."
-# get 6th column,		tolower()		get unique   remove '<', '>', '=', '#'	remove arpa requests	remove random namebench queries		remove more namebench crap
+# This is what I do in the next command;
+#	get 6th column,		
+#	tolower()		
+#	get unique   
+#	remove '<', '>', '=', '#'	
+#	remove arpa requests	
+#	remove random namebench queries		
+#	remove more namebench crap
 awk '{print $6 }' $FILE | awk '{print tolower($0)}' | awk '!x[$0]++' | sed '/[=#<>]/d' | awk '{print tolower($0)}' | grep -Ev 'in-addr.arpa' | grep -Ev 'ip6.arpa' | grep -Ev 'namebench' | egrep -Ev '[a-z0-9]{26}' | sort > $TMPFILE
 
+# Start wget check
 echo "	>> Starting HTTP checker at `date -u +%H:%M:%S`."
 echo "	>>> Please be patient."
+
+# Might take a looooong time -- threading could come in handy here
 while read a; do {
 	let i++
 	echo "	>>> ($i) $a at `date -u +%H:%M:%S`."
@@ -29,3 +39,5 @@ while read a; do {
 echo "	>>> Done, $i URLs checked."
 echo "	>> $OUTPUT generated."
 echo "	> End of program."
+
+# bye!
