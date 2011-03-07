@@ -22,7 +22,7 @@ echo "	>> generating $TMPFILE."
 #	remove arpa requests	
 #	remove random namebench queries		
 #	remove more namebench crap
-awk '{print $6 }' $FILE | awk '{print tolower($0)}' | awk '!x[$0]++' | sed '/[=#<>]/d' | awk '{print tolower($0)}' | grep -Ev 'in-addr.arpa' | grep -Ev 'ip6.arpa' | grep -Ev 'namebench' | egrep -Ev '[a-z0-9]{26}' | sort > $TMPFILE
+awk '{print $6 }' $FILE | awk '{print tolower($0)}' | awk '!x[$0]++' | sed '/[=#<>]/d' | grep -Ev 'in-addr.arpa' | grep -Ev 'ip6.arpa' | grep -Ev 'namebench' | egrep -Ev '[a-z0-9]{26}' | sort > $TMPFILE
 
 # Start wget check
 echo "	>> Starting HTTP checker at `date -u +%H:%M:%S`."
