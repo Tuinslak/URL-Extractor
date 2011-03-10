@@ -1,0 +1,11 @@
+google.com
+facebook.com
+youtube.com
+yahoo.com
+live.com
+blogspot.com
+baidu.com
+wikipedia.org
+twitter.com
+qq.com
+
